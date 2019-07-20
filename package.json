@@ -1,0 +1,22 @@
+{
+  "name": "full-stack-coworking",
+  "version": "1.0.0",
+  "description": "Project Coworking Space API",
+  "main": "app.js",
+  "scripts": {
+    "debug": "PORT=5000 node --inspect app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Rubini D",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.19.1",
+    "morgan": "^1.9.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.5"
+  }
+}
