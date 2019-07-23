@@ -1,6 +1,5 @@
 const { MONGO_DB_CONNECTION, NODE_ENV, PORT } = process.env;
 const express = require("express");
-const morgan = require("morgan");
 const mongoose = require("mongoose");
 const app = express();
 
@@ -15,8 +14,17 @@ if (MONGO_DB_CONNECTION) {
   console.log("Could not connect to database!");
 }
 
-if (NODE_ENV === "development") app.use(morgan("dev"));
+if (NODE_ENV === "development") app.use(require("morgan")("dev"));
 app.use(require("body-parser").json());
+
+//Routes
+app.use("/api/v1/units", require("./api/routes/units.js"));
+app.use(
+  "/api/v1/units/id/company/employees",
+  require("./api/routes/units.company.employees")
+);
+app.use("/api/v1/companies", require("./api/routes/companies.js"));
+app.use("/api/v1/employees", require("./api/routes/employees.js"));
 
 app.use((err, req, res, next) => {
   if (NODE_ENV === "development") console.error(err);
