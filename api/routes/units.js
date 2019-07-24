@@ -14,10 +14,15 @@ router.get("/", async (req, res, next) => {
     response = await Units.find({
       floor: req.query.floor
     }).select("-__v");
+  } else if (req.query.occupied) {
+    response = await Units.find({
+      company: { $exists: req.query.occupied }
+    }).select("-__v");
   } else {
     response = await Units.find()
       .select("-__v")
       .populate({
+        //populate not working - need to review
         path: "company",
         model: "Company",
         populate: {
@@ -38,7 +43,8 @@ router.patch("/:id", async (req, res, next) => {
       const unit = await Units.findById(req.params.id);
       unit.company = new Company({
         name: req.body.company.name,
-        contact_email: req.body.company.contact_email
+        contact_email: req.body.company.contact_email,
+        employees: []
       });
       response = await unit.save();
     } else {
@@ -62,13 +68,14 @@ router.patch("/:id/company", async (req, res, next) => {
   let response;
   try {
     const unit = await Units.findById(req.params.id);
-    if (unit.find({ "company.name": { $exists: true } })) {
+    if (unit.find({ company: { $exists: true } })) {
       unit.company.name = req.body.name;
       unit.company.contact_email = req.body.contact_email;
     } else {
       unit.company = new Company({
         name: req.body.name,
-        contact_email: req.body.contact_email
+        contact_email: req.body.contact_email,
+        employees: []
       });
     }
     response = await unit.save();

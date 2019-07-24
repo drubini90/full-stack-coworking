@@ -20,7 +20,7 @@ app.use(require("body-parser").json());
 //Routes
 app.use("/api/v1/units", require("./api/routes/units.js"));
 app.use(
-  "/api/v1/units/id/company/employees",
+  "/api/v1/units/:id/company/employees",
   require("./api/routes/units.company.employees")
 );
 app.use("/api/v1/companies", require("./api/routes/companies.js"));
