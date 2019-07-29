@@ -7,7 +7,7 @@ const unitSchema = new mongoose.Schema(
     kind: { type: String, enum: kind, required: true },
     floor: { type: Number, required: true },
     special_monthly_offer: { type: Number },
-    company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" }
+    company: mongoose.ObjectId
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
