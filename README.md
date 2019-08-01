@@ -1,7 +1,4 @@
 # full-stack-coworking
 
-Technologies Used:
+Work still in progress for 4 more routes - units.employees and employees routes
 
-- Node.js
-- MongoDB
-- Mongoose
