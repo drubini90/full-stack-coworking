@@ -23,6 +23,7 @@ app.use(
   "/api/v1/units/:id/company/employees",
   require("./api/routes/units.employees.js")
 );
+app.use("/api/v1/companies", require("./api/routes/companies.js"));
 // app.use("/api/v1/employees", require("./api/routes/employees.js"));
 
 app.use((err, req, res, next) => {
